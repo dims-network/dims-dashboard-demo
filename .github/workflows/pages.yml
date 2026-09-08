@@ -1,0 +1,38 @@
+# Self-contained on purpose. This repository is a fixed reference dashboard, so
+# its deploy must not depend on a workflow, an action version or a branch that
+# lives somewhere else and can move: a `uses:` pointing at another repository's
+# @main would let an unrelated change break this site without a commit here.
+name: Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+
+      # Fail here, with a clear message, rather than publishing an empty site.
+      - name: Check there is something to publish
+        run: |
+          test -f index.html || { echo "::error::No index.html — nothing to publish."; exit 1; }
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - id: deployment
+        uses: actions/deploy-pages@v4

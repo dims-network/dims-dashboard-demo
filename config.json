@@ -1,0 +1,15 @@
+{
+    "videoIDs": ["3120"],
+    "dataTypes": {
+        "3120": ["bodysync", "neuralsync", "neuralsync2", "neuralsync3"]
+    },
+    "include_RQA": ["bodysync", "neuralsync", "neuralsync2", "neuralsync3"],
+    "include_crosswavelet": ["bodysync", "neuralsync"],
+    "include_cRQA": [["bodysync", "neuralsync"]],
+    "include_elan": true,
+    "defaultWindowSize": 5,
+    "title": "DIMS Dashboard",
+    "subtitle": "Dynamic Interaction and Multimodal Signals",
+    "authors": "Grace Qiyuan Miao, Wim Pouw, Michal Weiss",
+    "contacts": "contacts: q.miao@ucla.edu & w.pouw@tilburguniversity.edu & michal.weiss@psych.uw.edu.pl"
+}
